@@ -20,228 +20,91 @@ const WorkSection: React.FC = () => {
           <div className="flex-grow h-[1px] bg-gray-700 opacity-60"></div>
         </div>
 
-        {/* Featured Project - Modified Layout */}
-        <div className="relative flex flex-col md:flex-row-reverse items-start justify-between mb-24">
-          {/* Floating Description Card - Now positioned on the right and aligned right */}
-          <div className="md:w-1/2 md:order-2 z-10 md:mt-16 md:text-right">
-            <p className="text-[#64ffda] text-sm uppercase tracking-widest mb-2">
-              Featured Project
-            </p>
-
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-100 mb-4">
-              Halcyon Theme
-            </h3>
-
-            {/* Background card for text */}
-            <div className="bg-[#1a202c] p-6 rounded-md shadow-xl">
-              <p className="text-gray-400 mb-4">
-                A minimal, dark blue theme for VS Code, Sublime Text, Atom,
-                iTerm, and more. Available on{" "}
-                <a href="#" className="text-[#64ffda] hover:underline">
-                  Visual Studio Marketplace
-                </a>
-                ,{" "}
-                <a href="#" className="text-[#64ffda] hover:underline">
-                  Package Control
-                </a>
-                ,{" "}
-                <a href="#" className="text-[#64ffda] hover:underline">
-                  Atom Package Manager
-                </a>
-                , and{" "}
-                <a href="#" className="text-[#64ffda] hover:underline">
-                  npm
-                </a>
-                .
+        {/* Featured Projects */}
+        {["Kabab.png", "Kabab.png", "Kabab.png"].map((img, idx) => (
+          <div
+            key={idx}
+            className="relative flex flex-col md:flex-row-reverse items-start justify-between mb-24"
+          >
+            {/* Description Card */}
+            <div
+              className={`md:w-1/2 z-10 md:mt-16 ${
+                idx % 2 === 0 ? "md:text-right md:order-2" : "md:text-left md:order-1 md:absolute left-0 top-0"
+              }`}
+            >
+              <p className="text-[#64ffda] text-sm uppercase tracking-widest mb-2">
+                Featured Project
               </p>
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-100 mb-4">
+                Halcyon Theme
+              </h3>
+              <div className="bg-[#1a202c] p-6 rounded-md shadow-xl">
+                <p className="text-gray-400 mb-4">
+                  A minimal, dark blue theme for VS Code, Sublime Text, Atom,
+                  iTerm, and more. Available on{" "}
+                  <a href="#" className="text-[#64ffda] hover:underline">
+                    Visual Studio Marketplace
+                  </a>
+                  ,{" "}
+                  <a href="#" className="text-[#64ffda] hover:underline">
+                    Package Control
+                  </a>
+                  ,{" "}
+                  <a href="#" className="text-[#64ffda] hover:underline">
+                    Atom Package Manager
+                  </a>
+                  , and{" "}
+                  <a href="#" className="text-[#64ffda] hover:underline">
+                    npm
+                  </a>
+                  .
+                </p>
+              </div>
+
+              <ul
+                className={`flex flex-wrap gap-4 text-sm text-gray-500 my-4 ${
+                  idx % 2 === 0 ? "md:justify-end" : "md:justify-start"
+                }`}
+              >
+                <li>VS Code</li>
+                <li>Sublime Text</li>
+                <li>Atom</li>
+                <li>iTerm2</li>
+                <li>Hyper</li>
+              </ul>
+
+              <div
+                className={`flex gap-5 text-xl ${
+                  idx % 2 === 0 ? "md:justify-end" : "md:justify-start"
+                }`}
+              >
+                <a href="#" className="hover:text-[#64ffda] transition">
+                  <FiGithub />
+                </a>
+                <a href="#" className="hover:text-[#64ffda] transition">
+                  <FiExternalLink />
+                </a>
+              </div>
             </div>
 
-            {/* Technologies list - aligned right */}
-            <ul className="flex flex-wrap gap-4 text-sm text-gray-500 my-4 md:justify-end">
-              <li>VS Code</li>
-              <li>Sublime Text</li>
-              <li>Atom</li>
-              <li>iTerm2</li>
-              <li>Hyper</li>
-            </ul>
-
-            {/* Links - aligned right */}
-            <div className="flex gap-5 text-xl md:justify-end">
-              <a href="#" className="hover:text-[#64ffda] transition">
-                <FiGithub />
-              </a>
-              <a href="#" className="hover:text-[#64ffda] transition">
-                <FiExternalLink />
-              </a>
+            {/* Image */}
+            <div
+              className={`relative md:w-[60%] w-full rounded-lg shadow-lg ${
+                idx % 2 === 0 ? "md:order-1 md:absolute left-0 top-0" : ""
+              }`}
+            >
+              <div className="relative w-full h-[300px] md:h-[400px]">
+                <Image
+                  src={`/imgs/${img}`}
+                  alt="Abdelrahman Attia - Frontend Developer"
+                  fill
+                  className="object-cover rounded-lg contrast-100 transition-all duration-500"
+                />
+              </div>
+              <div className="absolute inset-0 bg-[#0b1622]/50 hover:bg-transparent transition-all duration-500 rounded-lg"></div>
             </div>
           </div>
-
-          {/* Image Section - Now positioned on the left and takes up a large area */}
-          <div className="relative md:w-[60%] w-full rounded-lg shadow-lg md:order-1 md:absolute left-0 top-0">
-            <div className="relative w-full h-[300px] md:h-[400px]">
-              {" "}
-              {/* Adjusted height for better fit */}
-              <Image
-                src="/imgs/kabab.png" // Replace with your actual image path
-                alt="Abdelrahman Attia - Frontend Developer"
-                fill
-                className="object-cover rounded-lg  contrast-100 transition-all duration-500 "
-              />
-            </div>
-            {/* Overlay tint */}
-            <div className="absolute inset-0 bg-[#0b1622]/50 hover:bg-transparent transition-all duration-500 rounded-lg"></div>
-          </div>
-
-
-        </div>
-
-         <div className="relative flex flex-col md:flex-row-reverse items-start justify-between mb-24">
-          {/* Floating Description Card - Now positioned on the right and aligned right */}
-          <div className="md:w-1/2  z-10 md:mt-16 md:text-left md:order-1 md:absolute left-0 top-0">
-            <p className="text-[#64ffda] text-sm uppercase tracking-widest mb-2">
-              Featured Project
-            </p>
-
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-100 mb-4">
-              Halcyon Theme
-            </h3>
-
-            {/* Background card for text */}
-            <div className="bg-[#1a202c] p-6 rounded-md shadow-xl">
-              <p className="text-gray-400 mb-4">
-                A minimal, dark blue theme for VS Code, Sublime Text, Atom,
-                iTerm, and more. Available on{" "}
-                <a href="#" className="text-[#64ffda] hover:underline">
-                  Visual Studio Marketplace
-                </a>
-                ,{" "}
-                <a href="#" className="text-[#64ffda] hover:underline">
-                  Package Control
-                </a>
-                ,{" "}
-                <a href="#" className="text-[#64ffda] hover:underline">
-                  Atom Package Manager
-                </a>
-                , and{" "}
-                <a href="#" className="text-[#64ffda] hover:underline">
-                  npm
-                </a>
-                .
-              </p>
-            </div>
-
-            {/* Technologies list - aligned right */}
-            <ul className="flex flex-wrap gap-4 text-sm text-gray-500 my-4 md:justify-start">
-              <li>VS Code</li>
-              <li>Sublime Text</li>
-              <li>Atom</li>
-              <li>iTerm2</li>
-              <li>Hyper</li>
-            </ul>
-
-            {/* Links - aligned right */}
-            <div className="flex gap-5 text-xl md:justify-start">
-              <a href="#" className="hover:text-[#64ffda] transition">
-                <FiGithub />
-              </a>
-              <a href="#" className="hover:text-[#64ffda] transition">
-                <FiExternalLink />
-              </a>
-            </div>
-          </div>
-
-          {/* Image Section - Now positioned on the left and takes up a large area */}
-          <div className="relative md:w-[60%] w-full rounded-lg shadow-lg ">
-            <div className="relative w-full h-[300px] md:h-[400px]">
-              {" "}
-              {/* Adjusted height for better fit */}
-              <Image
-                src="/imgs/kabab.png" // Replace with your actual image path
-                alt="Abdelrahman Attia - Frontend Developer"
-                fill
-                className="object-cover rounded-lg  contrast-100 transition-all duration-500 "
-              />
-            </div>
-            {/* Overlay tint */}
-            <div className="absolute inset-0 bg-[#0b1622]/50 hover:bg-transparent transition-all duration-500 rounded-lg"></div>
-          </div>
-        </div>
-
-         <div className="relative flex flex-col md:flex-row-reverse items-start justify-between mb-24">
-          {/* Floating Description Card - Now positioned on the right and aligned right */}
-          <div className="md:w-1/2 md:order-2 z-10 md:mt-16 md:text-right">
-            <p className="text-[#64ffda] text-sm uppercase tracking-widest mb-2">
-              Featured Project
-            </p>
-
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-100 mb-4">
-              Halcyon Theme
-            </h3>
-
-            {/* Background card for text */}
-            <div className="bg-[#1a202c] p-6 rounded-md shadow-xl">
-              <p className="text-gray-400 mb-4">
-                A minimal, dark blue theme for VS Code, Sublime Text, Atom,
-                iTerm, and more. Available on{" "}
-                <a href="#" className="text-[#64ffda] hover:underline">
-                  Visual Studio Marketplace
-                </a>
-                ,{" "}
-                <a href="#" className="text-[#64ffda] hover:underline">
-                  Package Control
-                </a>
-                ,{" "}
-                <a href="#" className="text-[#64ffda] hover:underline">
-                  Atom Package Manager
-                </a>
-                , and{" "}
-                <a href="#" className="text-[#64ffda] hover:underline">
-                  npm
-                </a>
-                .
-              </p>
-            </div>
-
-            {/* Technologies list - aligned right */}
-            <ul className="flex flex-wrap gap-4 text-sm text-gray-500 my-4 md:justify-end">
-              <li>VS Code</li>
-              <li>Sublime Text</li>
-              <li>Atom</li>
-              <li>iTerm2</li>
-              <li>Hyper</li>
-            </ul>
-
-            {/* Links - aligned right */}
-            <div className="flex gap-5 text-xl md:justify-end">
-              <a href="#" className="hover:text-[#64ffda] transition">
-                <FiGithub />
-              </a>
-              <a href="#" className="hover:text-[#64ffda] transition">
-                <FiExternalLink />
-              </a>
-            </div>
-          </div>
-
-          {/* Image Section - Now positioned on the left and takes up a large area */}
-          <div className="relative md:w-[60%] w-full rounded-lg shadow-lg md:order-1 md:absolute left-0 top-0">
-            <div className="relative w-full h-[300px] md:h-[400px]">
-              {" "}
-              {/* Adjusted height for better fit */}
-              <Image
-                src="/imgs/Kabab.png" // Replace with your actual image path
-                alt="Abdelrahman Attia - Frontend Developer"
-                fill
-                className="object-cover rounded-lg  contrast-100 transition-all duration-500 "
-              />
-            </div>
-            {/* Overlay tint */}
-            <div className="absolute inset-0 bg-[#0b1622]/50 hover:bg-transparent transition-all duration-500 rounded-lg"></div>
-          </div>
-
-
-        </div>
-
-       
+        ))}
       </div>
     </section>
   );
