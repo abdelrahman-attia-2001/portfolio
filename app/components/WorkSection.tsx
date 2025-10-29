@@ -228,7 +228,7 @@ const WorkSection: React.FC = () => {
               {" "}
               {/* Adjusted height for better fit */}
               <Image
-                src="/imgs/kabab.png" // Replace with your actual image path
+                src="/imgs/Kabab.png" // Replace with your actual image path
                 alt="Abdelrahman Attia - Frontend Developer"
                 fill
                 className="object-cover rounded-lg  contrast-100 transition-all duration-500 "
