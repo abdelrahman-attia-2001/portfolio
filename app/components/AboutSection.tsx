@@ -16,7 +16,9 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
       <div className="max-w-200 mx-auto">
         {/* Section Header */}
         <h2 className="text-3xl font-bold mb-12 flex items-center whitespace-nowrap">
-          <span className="text-[#64ffda] font-mono text-sm md:text-base mr-3">01.</span>
+          <span className="text-[#64ffda] font-mono text-sm md:text-base mr-3">
+            01.
+          </span>
           <span className="text-gray-200">About Me</span>
           <div className="flex-grow ml-4 border-t border-gray-700 h-0"></div>
         </h2>

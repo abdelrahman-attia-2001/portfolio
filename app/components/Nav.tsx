@@ -87,14 +87,6 @@ const Nav: React.FC = () => {
               );
             })}
           </ul>
-
-          {/* Resume Button */}
-          <Button
-            href="#"
-            className="px-6 py-4 ml-4 "
-          >
-            Resume
-          </Button>
         </div>
       </nav>
     </header>

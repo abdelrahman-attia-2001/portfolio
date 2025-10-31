@@ -19,19 +19,8 @@ const HeroSection: React.FC = () => {
         </h2>
 
         <p className="max-w-xl text-lg text-gray-400 leading-relaxed">
-          {`I'm a software engineer specializing in building (and occasionally designing) exceptional digital experiences. Currently, I'm focused on building accessible, human-centered products at `}
-          <a
-            href="https://www.upstatement.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative inline-block text-[#0060a5] font-semibold 
-         after:content-[''] after:absolute after:left-0 after:bottom-0 
-         after:h-[2px] after:w-0 after:bg-[#0060a5] 
-         after:transition-all after:duration-500 
-         hover:after:w-full"
-          >
-            Upstatement.
-          </a>
+          {`I'm a software engineer specializing in building and designing modern, responsive, and user-friendly web applications.
+I'm passionate about creating digital experiences that are fast, accessible, and visually appealing. `}
           .
         </p>
 

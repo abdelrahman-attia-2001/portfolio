@@ -3,6 +3,36 @@ import { FiExternalLink, FiGithub } from "react-icons/fi";
 import Image from "next/image";
 
 const WorkSection: React.FC = () => {
+  const projects = [
+    {
+      title: "ITI JS Project",
+      description:
+        "An educational JavaScript project created during ITI training, featuring interactive mini apps and hands-on examples.",
+      tech: [, "JavaScript", "HTML", "CSS", "API"],
+      image: "proj(1).png",
+      github: "https://github.com/abdelrahman-attia-2001/iti-js-project",
+      live: "https://abdelrahman-attia-2001.github.io/iti-js-project/", // Add your live demo link if available
+    },
+    {
+      title: "Bootstrap Project",
+      description:
+        "A responsive website built using Bootstrap to showcase grid layouts, components, and UI styling skills.",
+      tech: ["Bootstrap", "HTML", "CSS"],
+      image: "proj(2).png",
+      github: "https://github.com/abdelrahman-attia-2001/bootstrab",
+      live: "https://abdelrahman-attia-2001.github.io/bootstrab/",
+    },
+    {
+      title: "Kabab Restaurant",
+      description:
+        "A modern restaurant landing page for a Kabab restaurant, featuring menu sections, offers, and smooth animations.",
+      tech: ["HTML", "CSS", "JavaScript"],
+      image: "Kabab.png",
+      github: "https://github.com/abdelrahman-attia-2001/kabab",
+      live: "https://abdelrahman-attia-2001.github.io/kabab/",
+    },
+  ];
+
   return (
     <section
       id="work"
@@ -21,7 +51,7 @@ const WorkSection: React.FC = () => {
         </div>
 
         {/* Featured Projects */}
-        {["Kabab.png", "Kabab.png", "Kabab.png"].map((img, idx) => (
+        {projects.map((project, idx) => (
           <div
             key={idx}
             className="relative flex flex-col md:flex-row-reverse items-start justify-between mb-24"
@@ -29,36 +59,19 @@ const WorkSection: React.FC = () => {
             {/* Description Card */}
             <div
               className={`md:w-1/2 z-10 md:mt-16 ${
-                idx % 2 === 0 ? "md:text-right md:order-2" : "md:text-left md:order-1 md:absolute left-0 top-0"
+                idx % 2 === 0
+                  ? "md:text-right md:order-2"
+                  : "md:text-left md:order-1 md:absolute left-0 top-0"
               }`}
             >
               <p className="text-[#64ffda] text-sm uppercase tracking-widest mb-2">
                 Featured Project
               </p>
               <h3 className="text-2xl md:text-3xl font-bold text-gray-100 mb-4">
-                Halcyon Theme
+                {project.title}
               </h3>
               <div className="bg-[#1a202c] p-6 rounded-md shadow-xl">
-                <p className="text-gray-400 mb-4">
-                  A minimal, dark blue theme for VS Code, Sublime Text, Atom,
-                  iTerm, and more. Available on{" "}
-                  <a href="#" className="text-[#64ffda] hover:underline">
-                    Visual Studio Marketplace
-                  </a>
-                  ,{" "}
-                  <a href="#" className="text-[#64ffda] hover:underline">
-                    Package Control
-                  </a>
-                  ,{" "}
-                  <a href="#" className="text-[#64ffda] hover:underline">
-                    Atom Package Manager
-                  </a>
-                  , and{" "}
-                  <a href="#" className="text-[#64ffda] hover:underline">
-                    npm
-                  </a>
-                  .
-                </p>
+                <p className="text-gray-400 mb-4">{project.description} </p>
               </div>
 
               <ul
@@ -66,11 +79,13 @@ const WorkSection: React.FC = () => {
                   idx % 2 === 0 ? "md:justify-end" : "md:justify-start"
                 }`}
               >
-                <li>VS Code</li>
-                <li>Sublime Text</li>
-                <li>Atom</li>
-                <li>iTerm2</li>
-                <li>Hyper</li>
+                {" "}
+                {project.tech.map((techItem, i) => (
+                  <li key={i} className="mr-2">
+                    {" "}
+                    {techItem}
+                  </li>
+                ))}
               </ul>
 
               <div
@@ -78,30 +93,46 @@ const WorkSection: React.FC = () => {
                   idx % 2 === 0 ? "md:justify-end" : "md:justify-start"
                 }`}
               >
-                <a href="#" className="hover:text-[#64ffda] transition">
+                <a
+                  target="_blank"
+                  href={`${project.github}`}
+                  className="hover:text-[#64ffda] transition"
+                >
                   <FiGithub />
                 </a>
-                <a href="#" className="hover:text-[#64ffda] transition">
+                <a
+                  target="_blank"
+                  href={`${project.live}`}
+                  className="hover:text-[#64ffda] transition"
+                >
                   <FiExternalLink />
                 </a>
               </div>
             </div>
 
             {/* Image */}
+
             <div
               className={`relative md:w-[60%] w-full rounded-lg shadow-lg ${
                 idx % 2 === 0 ? "md:order-1 md:absolute left-0 top-0" : ""
               }`}
             >
-              <div className="relative w-full h-[300px] md:h-[400px]">
-                <Image
-                  src={`/imgs/${img}`}
-                  alt="Abdelrahman Attia - Frontend Developer"
-                  fill
-                  className="object-cover rounded-lg contrast-100 transition-all duration-500"
-                />
-              </div>
-              <div className="absolute inset-0 bg-[#0b1622]/50 hover:bg-transparent transition-all duration-500 rounded-lg"></div>
+              <a
+                target="_blank"
+                href={`${project.live}`}
+                rel="noopener noreferrer"
+              >
+                <div className="relative w-full h-[300px] md:h-[400px]">
+                  <Image
+                    src={`/imgs/${project.image}`}
+                    alt="Abdelrahman Attia - Frontend Developer"
+                    fill
+                    className="object-cover rounded-lg contrast-100 transition-all duration-500"
+                  />
+                </div>
+
+                <div className="absolute inset-0 bg-[#0b1622]/50 hover:bg-transparent transition-all duration-500 rounded-lg"></div>
+              </a>
             </div>
           </div>
         ))}

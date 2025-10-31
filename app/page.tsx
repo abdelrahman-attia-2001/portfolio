@@ -5,6 +5,7 @@ import SocialSidebar from './components/SocialSidebar';
 import AboutSection from './components/AboutSection';
 import ExperienceSection from './components/ExperienceSection';
 import WorkSection from './components/WorkSection';
+import ContactSection from './components/ContactSection';
 export default function Home() {
   return (
    <div >
@@ -14,6 +15,8 @@ export default function Home() {
     <AboutSection  />
     <ExperienceSection />
     <WorkSection />
+    <ContactSection />
+
  
 
 

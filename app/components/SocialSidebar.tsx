@@ -10,15 +10,15 @@ interface SocialLink {
 }
 
 const socialLinks: SocialLink[] = [
-  { icon: FiGithub, url: "https://github.com/yourusername", label: "GitHub" },
+  { icon: FiGithub, url: "https://github.com/abdelrahman-attia-2001", label: "GitHub" },
     {
     icon: TbBrandGmail,
-    url: "https://Gmail.com/in/yourusername",
+    url: "https://mail.google.com/mail/?view=cm&fs=1&to=bedo8293@gmail.com",
     label: "Gmail",
   },
   {
     icon: FiLinkedin,
-    url: "https://linkedin.com/in/yourusername",
+    url: "https://www.linkedin.com/in/--abdo22?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
     label: "LinkedIn",
   },
 ];
