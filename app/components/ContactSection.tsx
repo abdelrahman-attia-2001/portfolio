@@ -13,7 +13,7 @@ const ContactSection = () => {
   return (
     <section
       id="contact"
-      className="flex flex-col items-center justify-center bg-[#11151c] text-gray-200 py-20 px-6 sm:px-8 md:px-12"
+      className="min-h-screen flex flex-col items-center justify-center bg-[#11151c] text-gray-200 px-6 sm:px-8 md:px-12"
     >
       <div className="flex flex-col items-center text-center max-w-2xl w-full space-y-6">
         {/* العنوان الصغير */}
@@ -23,7 +23,7 @@ const ContactSection = () => {
           whileInView="visible"
           transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="text-[#64ffda] font-mono text-sm mb-1"
+          className="text-[#64ffda] font-mono text-sm mb-1 tracking-widest"
         >
           04. What’s Next?
         </motion.span>
@@ -35,7 +35,7 @@ const ContactSection = () => {
           whileInView="visible"
           transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="text-gray-200 text-3xl sm:text-4xl font-bold "
+          className="text-gray-200 text-4xl sm:text-5xl font-bold"
         >
           Get In Touch
         </motion.h2>
@@ -47,7 +47,7 @@ const ContactSection = () => {
           whileInView="visible"
           transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="text-gray-400 text-base sm:text-lg leading-relaxed"
+          className="text-gray-400 text-base sm:text-lg leading-relaxed max-w-xl"
         >
           I’m currently open to new job opportunities, especially in frontend
           development. If you think I’d be a good fit for your team or project,
@@ -64,7 +64,7 @@ const ContactSection = () => {
         >
           <Button
             href="https://mail.google.com/mail/?view=cm&fs=1&to=bedo8293@gmail.com"
-            className="px-8 py-4 mt-4"
+            className="px-8 py-4 mt-6 text-lg shadow-lg shadow-[#64ffda33] hover:shadow-[#64ffda66]"
           >
             Say Hello
           </Button>
