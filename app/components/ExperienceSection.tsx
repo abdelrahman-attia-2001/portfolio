@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
@@ -12,7 +12,7 @@ import {
   SiTypescript,
   SiFirebase,
   SiGithub,
-    SiHtml5,
+  SiHtml5,
 } from "react-icons/si";
 import { MdOutlinePlayArrow } from "react-icons/md";
 
@@ -35,7 +35,25 @@ const creativeTechnologistData: JobDetails = {
 };
 
 const ExperienceSection: React.FC = () => {
-  const { title, company, duration, descriptionPoints } = creativeTechnologistData;
+  const { title, company, duration, descriptionPoints } =
+    creativeTechnologistData;
+
+  const [isClicked, setIsClicked] = useState(false);
+  const imageRef = useRef<HTMLDivElement>(null);
+
+  // لما تضغط بره الصورة، تشيل التأثير
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        imageRef.current &&
+        !imageRef.current.contains(event.target as Node)
+      ) {
+        setIsClicked(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const skills = [
     { icon: <SiJavascript />, color: "#F7DF1E", name: "JavaScript" },
@@ -47,17 +65,24 @@ const ExperienceSection: React.FC = () => {
     { icon: <SiHtml5 />, color: "#fd4a36", name: "HTML5" },
     { icon: <SiFirebase />, color: "#FFCA28", name: "Firebase" },
     { icon: <SiGithub />, color: "#EAEAEA", name: "GitHub" },
-
   ];
+
+  // أنيميشن الظهور من فوق لتحت
+  const fadeInFromTop = (delay = 0) => ({
+    initial: { opacity: 0, y: -60 },
+    whileInView: { opacity: 1, y: 0 },
+    transition: { duration: 0.8, delay, ease: "easeOut" as const},
+    viewport: { once: true },
+  });
 
   return (
     <section
       id="experience"
-      className="flex flex-col items-center justify-center bg-[#11151c] pl-40 p-4 pt-20 pb-20"
+      className="flex flex-col items-center justify-center bg-[#11151c] px-6 sm:px-10 lg:px-20 py-20"
     >
-      <div className="max-w-3xl mx-auto w-full">
-        {/* Section Header */}
-        <div className="flex items-center mb-12">
+      <div className="w-full max-w-5xl mx-auto">
+        {/* العنوان */}
+        <motion.div {...fadeInFromTop(0.1)} className="flex items-center mb-12">
           <span className="text-[#64ffda] font-mono text-sm md:text-base mr-3">
             02.
           </span>
@@ -65,33 +90,57 @@ const ExperienceSection: React.FC = () => {
             My Experiences
           </h2>
           <div className="flex-grow h-[1px] bg-gray-700 opacity-60"></div>
-        </div>
+        </motion.div>
 
         {/* المحتوى */}
-        <div className="flex flex-col lg:flex-row justify-center items-start gap-12">
+        <motion.div
+          {...fadeInFromTop(0.3)}
+          className="flex flex-col lg:flex-row justify-center items-start gap-12"
+        >
           {/* الصورة */}
-          <div className="flex justify-center items-start pt-4 lg:pt-0">
-            <div className="relative w-40 h-40 group">
+          <motion.div {...fadeInFromTop(0.4)} className="flex justify-center">
+            <div
+              ref={imageRef}
+              className="relative w-40 h-40 group cursor-pointer"
+              onClick={() => setIsClicked((prev) => !prev)}
+            >
+              {/* الإطار */}
               <div
-                className="absolute w-full h-full rounded border-2 border-[#eee]
+                className={`absolute w-full h-full rounded border-2 border-[#eee]
                 translate-x-3 translate-y-3 transition-all duration-300
-                group-hover:translate-x-4 group-hover:translate-y-4"
+                ${
+                  isClicked
+                    ? "translate-x-4 translate-y-4"
+                    : "group-hover:translate-x-4 group-hover:translate-y-4"
+                }`}
               ></div>
+
+              {/* الصورة */}
               <div
-                className="relative w-full h-full rounded-md overflow-hidden
-                transition-all duration-300 group-hover:-translate-x-2 group-hover:-translate-y-2"
+                className={`relative w-full h-full rounded-md overflow-hidden transition-all duration-300
+                ${
+                  isClicked
+                    ? "-translate-x-2 -translate-y-2"
+                    : "group-hover:-translate-x-2 group-hover:-translate-y-2"
+                }`}
               >
                 <Image
                   src="/imgs/iti.png"
                   alt="Abdelrahman Attia - Frontend Developer"
                   fill
-                  className="object-cover grayscale contrast-100 transition-all duration-500 group-hover:grayscale-0"
+                  className={`object-cover contrast-100 transition-all duration-500 
+                    ${
+                      isClicked
+                        ? "grayscale-0"
+                        : "grayscale group-hover:grayscale-0"
+                    }`}
                 />
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="flex-1">
+          {/* النص */}
+          <motion.div {...fadeInFromTop(0.5)} className="flex-1">
             <h3 className="text-xl sm:text-2xl font-bold mb-1">
               {title} <span className="text-[#64ffda]">@ {company}</span>
             </h3>
@@ -100,7 +149,7 @@ const ExperienceSection: React.FC = () => {
               {descriptionPoints.map((point, index) => (
                 <li
                   key={index}
-                  className="flex items-start text-base sm:text-ls leading-relaxed"
+                  className="flex items-start text-base sm:text-lg leading-relaxed"
                 >
                   <span className="text-[#64ffda] text-lg leading-none mr-3 mt-1 select-none">
                     <MdOutlinePlayArrow />
@@ -109,10 +158,11 @@ const ExperienceSection: React.FC = () => {
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        <div className="mt-20 text-center">
+        {/* Skills */}
+        <motion.div {...fadeInFromTop(0.7)} className="mt-20 text-center">
           <div className="flex items-center justify-center mb-10">
             <h3 className="text-gray-200 text-xl md:text-2xl font-bold mr-4 whitespace-nowrap">
               Technologies I Learned
@@ -124,14 +174,7 @@ const ExperienceSection: React.FC = () => {
             {skills.map((skill, index) => (
               <motion.div
                 key={index}
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{
-                  delay: index * 0.1,
-                  type: "spring",
-                  stiffness: 100,
-                  damping: 18,
-                }}
+                {...fadeInFromTop(0.9 + index * 0.1)}
                 whileHover={{
                   scale: 1.15,
                   color: skill.color,
@@ -144,7 +187,7 @@ const ExperienceSection: React.FC = () => {
               </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

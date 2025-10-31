@@ -1,6 +1,8 @@
+"use client";
 import React from "react";
 import { FiExternalLink, FiGithub } from "react-icons/fi";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const WorkSection: React.FC = () => {
   const projects = [
@@ -8,10 +10,10 @@ const WorkSection: React.FC = () => {
       title: "ITI JS Project",
       description:
         "An educational JavaScript project created during ITI training, featuring interactive mini apps and hands-on examples.",
-      tech: [, "JavaScript", "HTML", "CSS", "API"],
+      tech: ["JavaScript", "HTML", "CSS", "API"],
       image: "proj(1).png",
       github: "https://github.com/abdelrahman-attia-2001/iti-js-project",
-      live: "https://abdelrahman-attia-2001.github.io/iti-js-project/", // Add your live demo link if available
+      live: "https://abdelrahman-attia-2001.github.io/iti-js-project/",
     },
     {
       title: "Bootstrap Project",
@@ -70,39 +72,37 @@ const WorkSection: React.FC = () => {
               <h3 className="text-2xl md:text-3xl font-bold text-gray-100 mb-4">
                 {project.title}
               </h3>
-              <div className="bg-[#1a202c] p-6 rounded-md shadow-xl">
-                <p className="text-gray-400 mb-4">{project.description} </p>
+              <div className="bg-[#1a202c] p-6 rounded-md shadow-xl hidden md:block">
+                <p className="text-gray-400 mb-4">{project.description}</p>
               </div>
 
               <ul
-                className={`flex flex-wrap gap-4 text-sm text-gray-500 my-4 ${
+                className={`hidden md:flex flex-wrap gap-4 text-sm text-gray-500 my-4 ${
                   idx % 2 === 0 ? "md:justify-end" : "md:justify-start"
                 }`}
               >
-                {" "}
                 {project.tech.map((techItem, i) => (
                   <li key={i} className="mr-2">
-                    {" "}
                     {techItem}
                   </li>
                 ))}
               </ul>
 
               <div
-                className={`flex gap-5 text-xl ${
+                className={`hidden md:flex gap-5 text-xl ${
                   idx % 2 === 0 ? "md:justify-end" : "md:justify-start"
                 }`}
               >
                 <a
                   target="_blank"
-                  href={`${project.github}`}
+                  href={project.github}
                   className="hover:text-[#64ffda] transition"
                 >
                   <FiGithub />
                 </a>
                 <a
                   target="_blank"
-                  href={`${project.live}`}
+                  href={project.live}
                   className="hover:text-[#64ffda] transition"
                 >
                   <FiExternalLink />
@@ -110,29 +110,54 @@ const WorkSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Image */}
-
+            {/* Image (clickable div instead of <a>) */}
             <div
-              className={`relative md:w-[60%] w-full rounded-lg shadow-lg ${
+              className={`relative md:w-[60%] w-full rounded-lg shadow-lg cursor-pointer ${
                 idx % 2 === 0 ? "md:order-1 md:absolute left-0 top-0" : ""
               }`}
+              onClick={() => window.open(project.live, "_blank")}
             >
-              <a
-                target="_blank"
-                href={`${project.live}`}
-                rel="noopener noreferrer"
-              >
-                <div className="relative w-full h-[300px] md:h-[400px]">
-                  <Image
-                    src={`/imgs/${project.image}`}
-                    alt="Abdelrahman Attia - Frontend Developer"
-                    fill
-                    className="object-cover rounded-lg contrast-100 transition-all duration-500"
-                  />
-                </div>
+              <div className="relative w-full h-[300px] md:h-[400px] overflow-hidden rounded-lg">
+                <Image
+                  src={`/imgs/${project.image}`}
+                  alt={project.title}
+                  fill
+                  className="object-cover contrast-100 transition-all duration-500"
+                />
 
-                <div className="absolute inset-0 bg-[#0b1622]/50 hover:bg-transparent transition-all duration-500 rounded-lg"></div>
-              </a>
+                {/* Overlay for mobile */}
+                <motion.div
+                  initial={{ opacity: 0, y: -30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.6,
+                    ease: "easeOut" as const,
+                  }}
+                  viewport={{ once: true }}
+                  className="absolute inset-0 bg-[#0b1622]/70 flex flex-col justify-center items-center text-center p-6 text-gray-300 md:hidden"
+                >
+                  <h3 className="text-xl font-bold mb-3">{project.title}</h3>
+                  <p className="text-sm mb-4">{project.description}</p>
+                  <div className="flex gap-4 text-xl">
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-[#64ffda] transition"
+                    >
+                      <FiGithub />
+                    </a>
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-[#64ffda] transition"
+                    >
+                      <FiExternalLink />
+                    </a>
+                  </div>
+                </motion.div>
+              </div>
             </div>
           </div>
         ))}

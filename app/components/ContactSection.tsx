@@ -1,32 +1,74 @@
+"use client";
+
 import React from "react";
 import Button from "./Button";
+import { motion } from "framer-motion";
+
+const fadeDown = {
+  hidden: { y: -50, opacity: 0 },
+  visible: { y: 0, opacity: 1 },
+};
 
 const ContactSection = () => {
   return (
     <section
       id="contact"
-      className="flex flex-col items-center justify-center bg-[#11151c]  pt-40 text-gray-200"
+      className="flex flex-col items-center justify-center bg-[#11151c] text-gray-200 py-20 px-6 sm:px-8 md:px-12"
     >
-      <div className="max-w-xl mx-auto w-full text-center ">
-        <span className="text-[#64ffda] font-mono text-sm md:text-base ">
+      <div className="flex flex-col items-center text-center max-w-2xl w-full space-y-6">
+        {/* العنوان الصغير */}
+        <motion.span
+          variants={fadeDown}
+          initial="hidden"
+          whileInView="visible"
+          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="text-[#64ffda] font-mono text-sm mb-1"
+        >
           04. What’s Next?
-        </span>
-        <h2 className="text-gray-200 text-2xl md:text-4xl font-bold mr-4 whitespace-nowrap mt-6 mb-6">
-          Some Things I’ve Built
-        </h2>
-        <p className="text-gray-400 mb-4 text-lg ">
+        </motion.span>
+
+        {/* العنوان الرئيسي */}
+        <motion.h2
+          variants={fadeDown}
+          initial="hidden"
+          whileInView="visible"
+          transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="text-gray-200 text-3xl sm:text-4xl font-bold "
+        >
+          Get In Touch
+        </motion.h2>
+
+        {/* الفقرة */}
+        <motion.p
+          variants={fadeDown}
+          initial="hidden"
+          whileInView="visible"
+          transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="text-gray-400 text-base sm:text-lg leading-relaxed"
+        >
           I’m currently open to new job opportunities, especially in frontend
-          development.If you think I’d be a good fit for your team or project,
+          development. If you think I’d be a good fit for your team or project,
           feel free to reach out — I’d love to connect!
-        </p>
-        <Button href="https://mail.google.com/mail/?view=cm&fs=1&to=bedo8293@gmail.com"  className="px-10 py-5 mt-20 ml-0">
-          Say Hello
-        </Button>
+        </motion.p>
 
-
-        <a href="https://github.com/abdelrahman-attia-2001/portfolio" target="_blank" className="block mt-40 mb-10 text-gray-500 hover:text-[#64ffda] ransition-all duration-300  text-sm">
-          Designed & Built by Abdelrahman Attia
-        </a>
+        {/* الزر */}
+        <motion.div
+          variants={fadeDown}
+          initial="hidden"
+          whileInView="visible"
+          transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
+          viewport={{ once: true }}
+        >
+          <Button
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=bedo8293@gmail.com"
+            className="px-8 py-4 mt-4"
+          >
+            Say Hello
+          </Button>
+        </motion.div>
       </div>
     </section>
   );

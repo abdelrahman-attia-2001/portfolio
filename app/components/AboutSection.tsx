@@ -1,32 +1,64 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
-interface AboutSectionProps {
-  profileImageUrl?: string;
-}
-
-const AboutSection: React.FC<AboutSectionProps> = () => {
+const AboutSection: React.FC = () => {
   const profileImageUrl = "/imgs/Picsart_25-06-05_04-18-47-392.jpg";
+  const [isClicked, setIsClicked] = useState(false);
+  const imageRef = useRef<HTMLDivElement>(null);
+
+  // ✅ لما تضغط بره الصورة تشيل التأثير
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        imageRef.current &&
+        !imageRef.current.contains(event.target as Node)
+      ) {
+        setIsClicked(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <section
       id="about"
-      className="min-h-screen flex flex-col items-center justify-center bg-[#11151c]  p-4 pl-20"
+      className="min-h-screen flex flex-col items-center justify-center bg-[#11151c] text-gray-300 px-6 sm:px-10 lg:px-20 py-20"
     >
-      <div className="max-w-200 mx-auto">
-        {/* Section Header */}
-        <h2 className="text-3xl font-bold mb-12 flex items-center whitespace-nowrap">
+      <motion.div
+        initial={{ opacity: 0, y: -60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className="max-w-6xl w-full"
+      >
+        {/* Header */}
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+          className="text-2xl sm:text-3xl font-bold mb-12 flex items-center whitespace-nowrap"
+        >
           <span className="text-[#64ffda] font-mono text-sm md:text-base mr-3">
             01.
           </span>
           <span className="text-gray-200">About Me</span>
-          <div className="flex-grow ml-4 border-t border-gray-700 h-0"></div>
-        </h2>
+          <div className="flex-grow ml-4 border-t border-gray-700"></div>
+        </motion.h2>
 
         {/* Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* Left Side - Text */}
-          <div className="lg:col-span-2 text-ls space-y-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
+          {/* Text Section */}
+          <motion.div
+            initial={{ opacity: 0, y: -30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            viewport={{ once: true }}
+            className="lg:col-span-2 text-base sm:text-lg space-y-5 leading-relaxed"
+          >
             <p className="text-gray-200">
               Hello! {`I'm`}{" "}
               <span className="text-white font-semibold">
@@ -61,34 +93,57 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
               enhancing my UI skills, and experimenting with creative layouts
               that push the limits of what’s possible on the web.
             </p>
-          </div>
+          </motion.div>
 
-          {/* Right Side - Image */}
-          <div className="flex justify-center items-start pt-4 lg:pt-0">
-            <div className="relative w-64 h-64 lg:w-72 lg:h-72 group">
-              {/* Background Frame */}
+          {/* ✅ Image Section (نفس تأثير experience بالضبط) */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            viewport={{ once: true }}
+            className="flex justify-center items-center"
+          >
+            <div
+              ref={imageRef}
+              className="relative w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 group cursor-pointer"
+              onClick={() => setIsClicked((prev) => !prev)}
+            >
+              {/* Frame */}
               <div
-                className="absolute w-full h-full rounded-md border-2 border-[#eee]
-               translate-x-3 translate-y-3 transition-all duration-300
-               group-hover:translate-x-4 group-hover:translate-y-4"
+                className={`absolute w-full h-full rounded-md border-2 border-[#eee]
+                translate-x-3 translate-y-3 transition-all duration-300
+                ${
+                  isClicked
+                    ? "translate-x-4 translate-y-4"
+                    : "group-hover:translate-x-4 group-hover:translate-y-4"
+                }`}
               ></div>
 
               {/* Image */}
               <div
-                className="relative w-full h-full rounded-md overflow-hidden
-               transition-all duration-300 group-hover:-translate-x-2 group-hover:-translate-y-2"
+                className={`relative w-full h-full rounded-md overflow-hidden transition-all duration-300
+                ${
+                  isClicked
+                    ? "-translate-x-2 -translate-y-2"
+                    : "group-hover:-translate-x-2 group-hover:-translate-y-2"
+                }`}
               >
                 <Image
                   src={profileImageUrl}
                   alt="Abdelrahman Attia - Frontend Developer"
                   fill
-                  className="object-cover grayscale contrast-100 transition-all duration-500 group-hover:grayscale-0"
+                  className={`object-cover contrast-100 transition-all duration-500 
+                    ${
+                      isClicked
+                        ? "grayscale-0"
+                        : "grayscale group-hover:grayscale-0"
+                    }`}
                 />
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
