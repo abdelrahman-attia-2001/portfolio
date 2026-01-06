@@ -57,7 +57,7 @@ const HeroSection: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5, duration: 0.6 }}
         >
-          <Button href="#contact" className="px-10 py-4 mt-10">
+          <Button href="https://drive.google.com/drive/my-drive?hl=ar" className="px-10 py-4 mt-10">
             Get My CV
           </Button>
         </motion.div>

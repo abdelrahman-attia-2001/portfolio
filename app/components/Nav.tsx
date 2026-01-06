@@ -103,7 +103,7 @@ const Nav: React.FC = () => {
           {/* Logo */}
           <motion.div variants={navVariants} className="flex items-center">
             <Link
-              href="/"
+              href="#top"
               className="block transition-all duration-300 hover:scale-105"
             >
               <Image
